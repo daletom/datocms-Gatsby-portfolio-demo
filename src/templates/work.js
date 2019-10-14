@@ -1,6 +1,7 @@
 import React from 'react'
 import Slider from 'react-slick'
 import { HelmetDatoCms } from 'gatsby-source-datocms'
+import imgix from 'react-imgix'
 import Img from 'gatsby-image'
 import { graphql } from 'gatsby'
 import Layout from "../components/layout"
@@ -15,7 +16,8 @@ export default ({ data }) => (
         <div className="sheet__slider">
           <Slider infinite={true} slidesToShow={2} arrows>
             {data.datoCmsWork.gallery.map(({ fluid }) => (
-              <img alt={data.datoCmsWork.title} key={fluid.src} src={fluid.src} />
+              /*<img alt={data.datoCmsWork.title} key={fluid.src} src={fluid.src} />*/
+              <imgix src={fluid.src} />
             ))}
           </Slider>
         </div>
@@ -42,7 +44,7 @@ export const query = graphql`
       title
       excerpt
       gallery {
-        fluid(maxWidth: 200, imgixParams: { fm: "jpg", auto: "compress" }) {
+        fluid(maxWidth: 200, imgixParams: { auto: "compress" }) {
           src
         }
       }
@@ -53,7 +55,7 @@ export const query = graphql`
       }
       coverImage {
         url
-        fluid(maxWidth: 600, imgixParams: { fm: "jpg", auto: "compress" }) {
+        fluid(maxWidth: 600, imgixParams: { auto: "compress" }) {
           ...GatsbyDatoCmsSizes
         }
       }

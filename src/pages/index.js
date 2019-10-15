@@ -2,8 +2,8 @@ import React from 'react'
 import { Link, graphql } from 'gatsby'
 import Masonry from 'react-masonry-component'
 import Imgix from 'react-imgix'
-import Img from 'gatsby-image'
 import Layout from "../components/layout"
+import 'lazysizes';
 
 const IndexPage = ({ data }) => (
   <Layout>
@@ -12,7 +12,12 @@ const IndexPage = ({ data }) => (
         <div key={work.id} className="showcase__item">
           <figure className="card">
             <Link to={`/works/${work.slug}`} className="card__image">
-              <Imgix src={`${work.coverImage.fluid.src}`} sizes="(min-width: 1400px) 33vw, (min-width: 401px) 50vw, 100vw" loading="lazy" />
+              <Imgix className="lazyload" src={`${work.coverImage.fluid.src}`} sizes="(min-width: 1400px) 33vw, (min-width: 401px) 50vw, 100vw" attributeConfig={{
+                src: "data-src",
+                srcSet: "data-srcset",
+                sizes: "data-sizes"
+              }}
+              />
             </Link>
             <figcaption className="card__caption">
               <h6 className="card__title">

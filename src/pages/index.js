@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
 import Masonry from 'react-masonry-component'
+import Imgix from 'react-imgix'
 import Img from 'gatsby-image'
 import Layout from "../components/layout"
 
@@ -11,7 +12,7 @@ const IndexPage = ({ data }) => (
         <div key={work.id} className="showcase__item">
           <figure className="card">
             <Link to={`/works/${work.slug}`} className="card__image">
-              <Img fluid={work.coverImage.fluid} />
+              <Imgix src={`${work.coverImage.fluid.src}`} sizes="(min-width: 1400px) 33vw, (min-width: 401px) 50vw, 100vw"/>
             </Link>
             <figcaption className="card__caption">
               <h6 className="card__title">
@@ -32,20 +33,24 @@ export default IndexPage
 
 export const query = graphql`
   query IndexQuery {
-    allDatoCmsWork(sort: { fields: [position], order: ASC }) {
+    allDatoCmsWork(sort: {fields: [position], order: ASC}) {
       edges {
         node {
           id
           title
           slug
           excerpt
+          gallery {
+            id
+          }
           coverImage {
-            fluid(maxWidth: 450, imgixParams: { fm: "jpg", auto: "compress" }) {
-              ...GatsbyDatoCmsSizes
+            fluid {
+              src
             }
           }
         }
       }
     }
   }
+
 `

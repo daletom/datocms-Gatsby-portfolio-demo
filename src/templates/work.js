@@ -70,9 +70,8 @@ export const query = graphql`
         }
       }
       coverImage {
-        url
-        fluid(maxWidth: 600, imgixParams: { auto: "compress" }) {
-          ...GatsbyDatoCmsSizes
+        fluid {
+          src
         }
       }
     }

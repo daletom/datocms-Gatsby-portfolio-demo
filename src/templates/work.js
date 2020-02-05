@@ -17,7 +17,15 @@ export default ({ data }) => (
           <Slider infinite={true} slidesToShow={2} arrows>
             {data.datoCmsWork.gallery.map(({ fluid }) => (
               /*<img alt={data.datoCmsWork.title} key={fluid.src} src={fluid.src} />*/
-              <Imgix src={fluid.src} sizes="(min-width: 650px) 600px, 100vw" />
+              <Imgix
+                src={fluid.src}
+                sizes="(min-width: 650px) 600px, 100vw"
+                attributeConfig={{
+                  src: "data-src",
+                  srcSet: "data-srcset",
+                  sizes: "data-sizes"
+                }}
+              />
             ))}
           </Slider>
         </div>
@@ -28,7 +36,15 @@ export default ({ data }) => (
           }}
         />
         <div className="sheet__gallery">
-          <Img fluid={data.datoCmsWork.coverImage.fluid} />
+          <Imgix
+            src={data.datoCmsWork.coverImage.fluid}
+            sizes="(min-width: 650px) 600px, 100vw"
+            attributeConfig={{
+              src: "data-src",
+              srcSet: "data-srcset",
+              sizes: "data-sizes"
+            }}
+          />
         </div>
       </div>
     </article>

@@ -42,17 +42,20 @@ export default IndexPage;
 
 export const query = graphql`
 query IndexQuery {
-  work {
-    id
-    slug
-    coverImage {
-      responsiveImage(imgixParams: {auto: compress}) {
-        src
-        srcSet
+  allDatoCmsWork(sort: { fields: [position], order: ASC }) {
+    edges {
+      node {
+        id
+        title
+        slug
+        excerpt
+        coverImage {
+          fluid{
+            src
+          }
+        }
       }
     }
-    excerpt
-    title
   }
 }
 `;

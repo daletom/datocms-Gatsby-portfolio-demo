@@ -41,24 +41,18 @@ const IndexPage = ({ data }) => (
 export default IndexPage;
 
 export const query = graphql`
-  query IndexQuery {
-    allDatoCmsWork(sort: { fields: [position], order: ASC }) {
-      edges {
-        node {
-          id
-          title
-          slug
-          excerpt
-          gallery {
-            id
-          }
-          coverImage {
-            fluid {
-              src
-            }
-          }
-        }
+query IndexQuery {
+  work {
+    id
+    slug
+    coverImage {
+      responsiveImage(imgixParams: {auto: compress}) {
+        src
+        srcSet
       }
     }
+    excerpt
+    title
   }
+}
 `;
